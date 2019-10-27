@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="javascript" href="assets/javascript/game.js">
+
+
+
+
+    <title>Psychic Game</title>
+</head>
+<h1> The Psychic Game</h1>
+
+<content>
+
+    <body>
+
+        <p>What nuber am I thinking of? 1-10</p>
+        <hr>
+
+        <p>Wins: <span id="wins-text"></span></p>
+        <hr>
+
+        <p>Losses: <span id="losses-text"></span></p>
+        <hr>
+
+        <p>Guesses Left: <span id="GuessesLeft-text"></span></p>
+
+        <hr>
+
+        <div class="form">
+            <label for="guessField">guess here: </label>
+            <input type="text" id="guessField" class="guessField">
+            <input type="submit" value="Submit guess" class="guessSubmit" id="submitguess">
+        </div>
+
+        <script type="text/javascript">
+
+            // random value generated 
+            var computerGuess = Math.floor(Math.random() * 10 + 1);
+            console.log(computerGuess);
+            // counting the number of guesses 
+            // NOTE: Max guesses allowed will be 3 
+            var guessesLeft = 3;
+            var wins = 0;
+            var losses = 0;
+
+            // display scores (wins, losses, guessesLeft)
+            document.getElementById("wins-text").textContent = wins;
+            document.getElementById("losses-text").textContent = losses
+            document.getElementById("GuessesLeft-text").textContent = guessesLeft
+
+
+            document.getElementById("submitguess").onclick = function () {
+
+                // number guessed by user      
+                var userGuess = document.getElementById("guessField").value;
+                // TODO: check datatype of userGuess
+
+                if (userGuess == computerGuess) {
+                    alert("YOU WON!!!");
+                    wins++
+                    guessesLeft = 3;
+                    document.getElementById("wins-text").textContent = wins;
+                    // increase "wins" by 
+                    // reset guessesLeft
+                    // display score/wins on the page
+                }
+                else if (userGuess > computerGuess) /* if guessed number is greater 
+                       than actual number*/ {
+                    guessesLeft--;
+                    alert("smaller!");
+                    document.getElementById("GuessesLeft-text").textContent = guessesLeft
+                }
+                else {
+                    guessesLeft--;
+                    alert("larger")
+                    document.getElementById("GuessesLeft-text").textContent = guessesLeft
+                }
+
+
+                // guessesLeft = 3
+                // first guess - wrong guessesLeft = 2
+                // second guess - wrong guessLeft = 1
+                // third guess - wrong guessesLeft = 0
+                // if (guessesLeft === 0) { LOSE!!!! }
+
+                if (guessesLeft === 0) {
+                    alert("you lose");
+                    losses++;
+                    guessesLeft = 3;
+                    document.getElementById("GuessesLeft-text").textContent = guessesLeft
+                    document.getElementById("losses-text").textContent = losses
+                }
+
+            }
+
+
+
+        </script>
+
+    </body>
+</content>
+
+</html>
